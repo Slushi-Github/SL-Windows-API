@@ -1,0 +1,13 @@
+{
+    "name": "sl-windows-api",
+    "url" : "https://github.com/Slushi-Github/SL-Windows-API",
+    "license": "Apache",
+    "tags": ["windows", "api", "native", "cpp"],
+    "description": "A large number of usable Windows API functions in Haxe!",
+    "version": "1.0.0",	
+    "releasenote": "",
+    "classPath": "src/",
+    "contributors": ["Slushi"],
+    "dependencies": {
+    }
+}
