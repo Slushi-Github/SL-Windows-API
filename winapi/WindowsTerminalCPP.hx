@@ -1,4 +1,4 @@
-package src;
+package winapi;
 
 /**
  * This file is in charge of providing some Windows terminal functions 

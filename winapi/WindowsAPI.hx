@@ -1,4 +1,4 @@
-package src;
+package winapi;
 
 import sys.io.Process;
 
@@ -105,33 +105,37 @@ class WindowsAPI {
 		WindowsCPP._setWindowLayeredMode(window);
 	}
 
-	public function getCursorPositionX() {
+	public static function getCursorPositionX() {
 		return WindowsCPP.getCursorPositionX();
 	}
 
-	public function getCursorPositionY() {
+	public static function getCursorPositionY() {
 		return WindowsCPP.getCursorPositionY();
+	}
+
+	public static function reDefineMainWindowTitle(windowTitle:String) {
+		WindowsCPP.reDefineMainWindowTitle(windowTitle);
 	}
 
 	// Windows Terminal Functions ////////////////////
 
-	public function clearTerminal() {
+	public static function clearTerminal() {
 		WindowsTerminalCPP.clearTerminal();
 	}
 
-	public function allocConsole() {
+	public static function allocConsole() {
 		WindowsTerminalCPP.allocConsole();
 	}
 
-	public function hideMainWindow() {
+	public static function hideMainWindow() {
 		WindowsTerminalCPP.hideMainWindow();
 	}
 
-	public function setConsoleTitle(title:String) {
+	public static function setConsoleTitle(title:String) {
 		WindowsTerminalCPP.setConsoleTitle(title);
 	}
 
-	public function setConsoleWindowIcon(path:String) {
+	public static function setConsoleWindowIcon(path:String) {
 		WindowsTerminalCPP.setConsoleWindowIcon(path);
 	}
 

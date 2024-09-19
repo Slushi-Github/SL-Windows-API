@@ -4,9 +4,8 @@
     "license": "Apache",
     "tags": ["windows", "api", "native", "cpp"],
     "description": "A large number of usable Windows API functions in Haxe!",
-    "version": "1.0.0",	
-    "releasenote": "",
-    "classPath": "src/",
+    "version": "1.0.2",	
+    "releasenote": "convert functions to static functions, enhanced readme",
     "contributors": ["Slushi"],
     "dependencies": {
     }

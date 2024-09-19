@@ -1,4 +1,4 @@
-package src;
+package winapi;
 
 /**
  * More than 600 lines of almost pure C++ code :3 
