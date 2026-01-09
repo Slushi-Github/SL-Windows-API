@@ -7,6 +7,7 @@ package winapi;
     <lib name="dwmapi.lib" if="windows" />
     <lib name="shell32.lib" if="windows" />
     <lib name="gdi32.lib" if="windows" />
+	<lib name="advapi32.lib" if="windows" />
 </target>
 ')
 @:cppFileCode('
@@ -229,6 +230,52 @@ class WindowsCPP
 	{
 	}
 
+	@:functionCode('
+        HWND window = GET_MAIN_WINDOW();
+
+        UINT thickness = th;
+
+        DwmSetWindowAttribute(window, DWMWA_VISIBLE_FRAME_BORDER_THICKNESS, &thickness, sizeof(thickness));
+    ') 
+    public static function setWindowthickness(th:Int = 0)
+    {
+    }
+	
+    @:functionCode('
+        HWND window = GET_MAIN_WINDOW();
+
+        auto color2 = RGB(r, g, b);
+        DwmSetWindowAttribute(window, 36, &color2, sizeof(COLORREF));
+
+		UpdateWindow(window);
+    ')
+    public static function setWindowTextColor(r:Int, g:Int, b:Int):Void
+    {
+    }
+
+	@:functionCode('
+		HWND window = GET_MAIN_WINDOW();
+		DWM_WINDOW_CORNER_PREFERENCE preference = static_cast<DWM_WINDOW_CORNER_PREFERENCE>(pmode);;
+
+		DwmSetWindowAttribute(window, DWMWA_WINDOW_CORNER_PREFERENCE, &preference, sizeof(preference));
+	')
+	public static function setWindowRound(pmode:WindowsAPI.WindowRound)
+    {
+    }
+
+	@:functionCode('
+		HWND window = GET_MAIN_WINDOW();
+
+		int damode = dmode ? 1 : 0;
+
+		DwmSetWindowAttribute(window, DWMWA_USE_IMMERSIVE_DARK_MODE, &damode, sizeof(damode));
+
+		UpdateWindow(window);
+	')
+	public static function windowDarkMode(dmode):Void
+    {
+    }
+	
 	@:functionCode('
 	HWND window = GET_MAIN_WINDOW();
 	SetWindowLong(window, GWL_EXSTYLE, GetWindowLong(window, GWL_EXSTYLE) ^ WS_EX_LAYERED);
