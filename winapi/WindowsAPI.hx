@@ -31,8 +31,13 @@ class WindowsAPI {
 	}
 
 	public static function showMessageBox(message:String, caption:String, icon:MessageBoxIcon = WARNING):Void {
-		#if HX_WINDOWS
-		WindowsCPP.showMessageBox(caption, message, icon);
+		#if HX_WINDOWS 
+		if (icon == null)
+			return;
+
+		final realNumber:Int = cast icon;
+
+		WindowsCPP.showMessageBox(caption, message, realNumber);
 		#end
 	}
 
@@ -116,7 +121,9 @@ class WindowsAPI {
 		if (pmode == null)
 			return;
 
-		WindowsCPP.setWindowRound(pmode);
+		final realNumber:Int = cast pmode;
+
+		WindowsCPP.setWindowRound(realNumber);
 		#end
 	}
 
@@ -211,6 +218,7 @@ class WindowsAPI {
 	}
 
 	public static function setWindowLayeredMode(window:Null<WindowLayeredMode>):Void {
+		#if HX_WINDOWS
 		if (window == null)
 			return;
 
@@ -222,6 +230,7 @@ class WindowsAPI {
 		}
 
 		WindowsCPP._setWindowLayeredMode(numberMode);
+		#end
 	}
 
 	public static function getCursorPositionX():Int {
