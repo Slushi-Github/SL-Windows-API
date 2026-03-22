@@ -1,6 +1,7 @@
 package winapi;
 
 @:cppFileCode('
+#if defined(HX_WINDOWS)
 #include <Windows.h>
 #include <windowsx.h>
 #include <cstdio>
@@ -20,9 +21,11 @@ package winapi;
 #pragma comment(lib, "User32.lib")
 #pragma comment(lib, "Shell32.lib")
 #pragma comment(lib, "gdi32.lib")
+#endif
 ')
 class WindowsTerminalCPP
 {
+	#if HX_WINDOWS
 	@:functionCode('
         system("CLS");
         std::cout<< "" <<std::flush;
@@ -206,4 +209,5 @@ class WindowsTerminalCPP
 	public static function hideConsoleWindow()
 	{
 	}
+	#end
 }

@@ -8,6 +8,7 @@ package winapi.gdi;
  * Author: Slushi
  */
 @:cppFileCode('
+#if defined(HX_WINDOWS)
 #include <Windows.h>
 #include <windowsx.h>
 #include <cstdio>
@@ -122,6 +123,7 @@ BOOL CALLBACK EnumChildProc(HWND hwnd, LPARAM lParam) {
 
     return TRUE;
 }
+#endif
 ')
 /*
  * This is the main class of the Windows GDI effects in this library, it has the C++ code of the effects, 
@@ -132,6 +134,7 @@ BOOL CALLBACK EnumChildProc(HWND hwnd, LPARAM lParam) {
  */
 class WindowsGDI
 {
+	#if HX_WINDOWS
 	@:functionCode('
         elapsedTime = elapsed;
     ')
@@ -186,6 +189,7 @@ class WindowsGDI
 	public static function _setCustomTitleTextToWindows(text:String = "...")
 	{
 	}
+	#end
 
 	/////////////////////////////////////////////////////////////////////////////
 
@@ -194,12 +198,20 @@ class WindowsGDI
 	 * @param effect The name of the effect to prepare
 	 * @param wait The wait time between each effect update (in milliseconds)
 	 */
-	public static function prepareGDIEffect(effect:String, wait:Float = 0)
+	public static function prepareGDIEffect(effect:String, wait:Null<Float> = 0):Void
 	{
+		#if HX_WINDOWS
+		if (wait == null || wait < 0) wait = 0;
+
 		var effectClass = Type.resolveClass('winapi.gdi.WinEffect_' + effect);
+		if (effectClass == null)
+		{
+			effectClass = Type.resolveClass('winapi.gdi.' + effect);
+		}
+
 		if (effectClass != null)
 		{
-			var initEffect = Type.createInstance(effectClass, []);
+			final initEffect = Type.createInstance(effectClass, []);
 			WindowsGDIThread.gdiEffects.set(effect, new WindowsGDIEffectData(initEffect, wait, false));
 			trace('created [${effect}] GDI effect from class [WinEffect_${effect}]');
 		}
@@ -207,6 +219,7 @@ class WindowsGDI
 		{
 			trace('[WinEffect_${effect}] not found!');
 		}
+		#end
 	}
 
 	/**
@@ -214,9 +227,10 @@ class WindowsGDI
 	 * @param effect The name of the effect to set the wait time
 	 * @param wait The wait time between each effect update (in milliseconds)
 	 */
-	public static function setGDIEffectWaitTime(effect:String, wait:Float)
+	public static function setGDIEffectWaitTime(effect:String, wait:Null<Float>):Void
 	{
-		var gdi = WindowsGDIThread.gdiEffects.get(effect);
+		if (wait == null || wait < 0) wait = 0;
+		final gdi = WindowsGDIThread.gdiEffects.get(effect);
 		if (gdi != null)
 		{
 			gdi.wait = wait;
@@ -231,7 +245,7 @@ class WindowsGDI
 	 * Removes a GDI effect
 	 * @param effect The name of the effect to remove
 	 */
-	public static function removeGDIEffect(effect:String)
+	public static function removeGDIEffect(effect:String):Void
 	{
 		var gdi = WindowsGDIThread.gdiEffects.get(effect);
 		if (gdi != null)
@@ -249,12 +263,12 @@ class WindowsGDI
 	 * @param effect The name of the effect to enable or disable
 	 * @param enabled Whether to enable or disable the effect
 	 */
-	public static function enableGDIEffect(effect:String, enabled:Bool = true)
+	public static function enableGDIEffect(effect:String, enabled:Null<Bool> = true):Void
 	{
-		var gdi = WindowsGDIThread.gdiEffects.get(effect);
+		final gdi = WindowsGDIThread.gdiEffects.get(effect);
 		if (gdi != null)
 		{
-			gdi.enabled = enabled;
+			gdi.enabled = enabled ?? true;
 		}
 		else
 		{
@@ -263,6 +277,7 @@ class WindowsGDI
 	}
 }
 
+#if HX_WINDOWS
 class WindowsGDIEffect
 {
 	public function update()
@@ -319,3 +334,4 @@ class WinEffect_SetTitleTextToWindows extends WindowsGDIEffect
 		WindowsGDI._setCustomTitleTextToWindows(text);
 	}
 }
+#end

@@ -44,8 +44,9 @@ class WindowsGDIThread
 	 * 
 	 * The thread will loop through all the registered GDI effects and update them
 	 */
-	public static function initWindowsGDIThread()
+	public static function initWindowsGDIThread():Void
 	{
+		#if HX_WINDOWS
 		if (mainThread != null)
 			return;
 
@@ -64,13 +65,14 @@ class WindowsGDIThread
 					WindowsGDI.setElapsedTime(elapsedTime);
 
 					for (gdi in gdiEffects) {
-						if (!gdi.enabled)
+						if (gdi == null || !gdi.enabled)
 							continue;
 
 						if (gdi.wait > 0) {
 							// Wait if wait time is greater than 0, slows down the effect
 							Sys.sleep(gdi.wait);
 						}
+						
 						gdi.gdiEffect.update();
 					}
 				}
@@ -79,6 +81,7 @@ class WindowsGDIThread
 				stopWindowsGDIThread();
 			}
 		});
+		#end
 	}
 
 	/**
@@ -86,6 +89,7 @@ class WindowsGDIThread
 	 */
 	public static function stopWindowsGDIThread()
 	{
+		#if HX_WINDOWS
 		if (mainThread != null)
 		{
 			trace('Stopping Windows GDI Thread...');
@@ -96,5 +100,6 @@ class WindowsGDIThread
 		gdiEffects.clear();
 		elapsedTime = 0;
 		WindowsGDI.setElapsedTime(elapsedTime);
+		#end
 	}
 }

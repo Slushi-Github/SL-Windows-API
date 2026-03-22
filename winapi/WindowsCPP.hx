@@ -1,16 +1,17 @@
 package winapi;
 
 @:buildXml('
-<compilerflag value="/DelayLoad:ComCtl32.dll"/>
+<compilerflag value="/DelayLoad:ComCtl32.dll" if="HX_WINDOWS" />
 
 <target id="haxe">
-    <lib name="dwmapi.lib" if="windows" />
-    <lib name="shell32.lib" if="windows" />
-    <lib name="gdi32.lib" if="windows" />
-	<lib name="advapi32.lib" if="windows" />
+    <lib name="dwmapi.lib" if="HX_WINDOWS" />
+    <lib name="shell32.lib" if="HX_WINDOWS" />
+    <lib name="gdi32.lib" if="HX_WINDOWS" />
+	<lib name="advapi32.lib" if="HX_WINDOWS" />
 </target>
 ')
 @:cppFileCode('
+#if defined(HX_WINDOWS)
 #include <Windows.h>
 #include <windowsx.h>
 #include <cstdio>
@@ -153,11 +154,13 @@ int screenCapture(int x, int y, int w, int h, LPCSTR fname)
     if(SaveToFile(hBitmap, fname)) return 1;
     return 0;
 }
+#endif
 
 //////////////////////////////////////////////////////////////////////////////////////
 ')
 class WindowsCPP
 {
+	#if HX_WINDOWS
 	@:functionCode('
 		MessageBox(GetActiveWindow(), message, caption, icon | MB_SETFOREGROUND);
 	')
@@ -193,7 +196,7 @@ class WindowsCPP
             SetLayeredWindowAttributes(hWnd, RGB(25, 25, 25), 0, LWA_COLORKEY);
         }
     ')
-	static public function getWindowsTransparent(res:Int = 0)
+	static public function setWindowsTransparent(res:Int = 0)
 	{
 		return res;
 	}
@@ -596,4 +599,5 @@ class WindowsCPP
 	public static function _setWindowLayeredMode(numberMode:Int)
 	{
 	}
+	#end
 }
