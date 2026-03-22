@@ -164,7 +164,7 @@ class WindowsCPP
 	@:functionCode('
 		MessageBox(GetActiveWindow(), message, caption, icon | MB_SETFOREGROUND);
 	')
-	public static function showMessageBox(caption:String, message:String, icon:WindowsAPI.MessageBoxIcon = WARNING)
+	public static function showMessageBox(caption:String, message:String, icon:Int = 0x00000030)
 	{
 	}
 
