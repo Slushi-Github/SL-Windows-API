@@ -262,7 +262,7 @@ class WindowsCPP
 
 		DwmSetWindowAttribute(window, DWMWA_WINDOW_CORNER_PREFERENCE, &preference, sizeof(preference));
 	')
-	public static function setWindowRound(pmode:WindowsAPI.WindowRound)
+	public static function setWindowRound(pmode:Int = 0)
     {
     }
 
