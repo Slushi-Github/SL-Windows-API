@@ -4,7 +4,7 @@
     "license": "MIT",
     "tags": ["windows", "api", "native", "cpp"],
     "description": "A large number of usable Windows API functions in Haxe!",
-    "version": "1.3.0",	
+    "version": "1.3.2",	
     "releasenote": "Refactor and added null safety.",
     "contributors": ["Slushi"],
     "dependencies": {
