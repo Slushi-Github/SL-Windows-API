@@ -2,21 +2,21 @@ package winapi;
 
 import sys.io.Process;
 
-enum abstract MessageBoxIcon(Null<Int>) {
+enum abstract MessageBoxIcon(Null<Int>) from Int to Int {
 	var ERROR = 0x00000010;
 	var QUESTION = 0x00000020;
 	var WARNING = 0x00000030;
 	var INFORMATION = 0x00000040;
 }
 
-enum abstract WindowRound(Null<Int>) {
+enum abstract WindowRound(Null<Int>) from Int to Int {
 	var DWMWCP_DEFAULT = 0;
 	var DWMWCP_DONOTROUND = 1;
 	var DWMWCP_ROUND = 2;
 	var DWMWCP_ROUNDSMALL = 3;
 }
 
-enum abstract WindowLayeredMode(Null<Int>) {
+enum abstract WindowLayeredMode(Null<Int>) from Int to Int {
 	var DESKTOP_WINDOW = 0;
 	var TASKBAR_WINDOW = 1;
 }
@@ -30,7 +30,7 @@ class WindowsAPI {
 		#end
 	}
 
-	public static function showMessageBox(message:String, caption:String, icon:MessageBoxIcon = MessageBoxIcon.WARNING):Void {
+	public static function showMessageBox(message:String, caption:String, icon:MessageBoxIcon = 0x00000030):Void {
 		#if HX_WINDOWS 
 		if (icon == null)
 			return;
