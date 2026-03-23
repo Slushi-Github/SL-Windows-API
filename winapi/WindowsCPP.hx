@@ -190,28 +190,26 @@ class WindowsCPP
 
 	@:functionCode('
         HWND hWnd = GET_MAIN_WINDOW();
-        res = SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED);
+        int res = SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) | WS_EX_LAYERED);
         if (res)
         {
-            SetLayeredWindowAttributes(hWnd, RGB(25, 25, 25), 0, LWA_COLORKEY);
+            SetLayeredWindowAttributes(hWnd, RGB(r, g, b), 0, LWA_COLORKEY);
         }
     ')
-	static public function setWindowsTransparent(res:Int = 0)
+	static public function setWindowTransparent(r:Int = 25, g:Int = 25, b:Int = 25)
 	{
-		return res;
 	}
 
 	@:functionCode('
         HWND hWnd = GET_MAIN_WINDOW();
-        res = SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) ^ WS_EX_LAYERED);
+        int res = SetWindowLong(hWnd, GWL_EXSTYLE, GetWindowLong(hWnd, GWL_EXSTYLE) ^ WS_EX_LAYERED);
         if (res)
         {
             SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 1, LWA_COLORKEY);
         }
     ')
-	static public function disableWindowTransparent(res:Int = 0)
+	static public function disableWindowTransparent()
 	{
-		return res;
 	}
 
 	@:functionCode('
@@ -275,7 +273,7 @@ class WindowsCPP
 
 		UpdateWindow(window);
 	')
-	public static function windowDarkMode(dmode):Void
+	public static function windowDarkMode(dmode:Bool):Void
     {
     }
 	
@@ -599,5 +597,65 @@ class WindowsCPP
 	public static function _setWindowLayeredMode(numberMode:Int)
 	{
 	}
+
+	@:functionCode('
+		HMODULE ntdll = GetModuleHandleA("ntdll.dll");
+		if (ntdll) {
+			void* wine_get_version = GetProcAddress(ntdll, "wine_get_version");
+			if (wine_get_version) {
+				return true;
+			}
+		}
+		return false;
+	')
+	public static function isRunningInWine():Bool {
+		return false;
+	}
+
+	@:functionCode('
+		HWND window = GET_MAIN_WINDOW();
+		COLORREF color = 0;
+		DwmGetWindowAttribute(window, 35, &color, sizeof(COLORREF));
+		res = (int)color;
+	')
+	public static function getWindowBorderColor(res:Int = 0):Int {
+		return res;
+	}
+
+	@:functionCode('
+		HWND window = GET_MAIN_WINDOW();
+		COLORREF color = 0;
+		DwmGetWindowAttribute(window, 36, &color, sizeof(COLORREF));
+		res = (int)color;
+	')
+	public static function getWindowTextColor(res:Int = 0):Int {
+		return res;
+	}
+
+	@:functionCode('
+		HWND window = GET_MAIN_WINDOW();
+		UINT thickness = 0;
+		DwmGetWindowAttribute(window, DWMWA_VISIBLE_FRAME_BORDER_THICKNESS, &thickness, sizeof(thickness));
+		res = (int)thickness;
+	')
+	public static function getWindowThickness(res:Int = 0):Int {
+		return res;
+	}
+
+	@:functionCode('
+		HWND window = GET_MAIN_WINDOW();
+		DWM_WINDOW_CORNER_PREFERENCE pref = DWMWCP_DEFAULT;
+		DwmGetWindowAttribute(window, DWMWA_WINDOW_CORNER_PREFERENCE, &pref, sizeof(pref));
+		res = (int)pref;
+	')
+	public static function getWindowCornerMode(res:Int = 0):Int {
+		return res;
+	}
+
+	@:functionCode('
+		SetFileAttributesA(path, FILE_ATTRIBUTE_HIDDEN | FILE_ATTRIBUTE_SYSTEM);
+	')
+	@:noCompletion
+	public static function setHiddenFolder(path:String):Void {}
 	#end
 }

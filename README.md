@@ -6,6 +6,8 @@ the functions you can use can be found in `winapi/WIndowsAPI.hx`.
 
 This is a simplified version of the Windows API that I have in my [Friday Night Funkin'](https://github.com/FunkinCrew/Funkin) Engine, [Slushi Engine](https://github.com/Slushi-Github/Slushi-Engine).
 
+Define `WINDOWS_API_LOGS` for enable logs of this library.
+
 ## How to use this:
 
 For functions where something related to the window is modified, it is necessary to use this function to define the window title (it is recommended to leave this in an update function).

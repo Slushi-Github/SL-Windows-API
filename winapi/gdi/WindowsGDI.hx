@@ -1,12 +1,5 @@
 package winapi.gdi;
 
-/*
- * This is the main class of the Windows GDI effects in this library, it has the C++ code of the effects, 
- * and there are functions to prepare, start and remove an added effect
- * (some of the GDI effect code is taken from the MENZ malware source code)
- * 
- * Author: Slushi
- */
 @:cppFileCode('
 #if defined(HX_WINDOWS)
 #include <Windows.h>
@@ -213,11 +206,15 @@ class WindowsGDI
 		{
 			final initEffect = Type.createInstance(effectClass, []);
 			WindowsGDIThread.gdiEffects.set(effect, new WindowsGDIEffectData(initEffect, wait, false));
+			#if WINDOWS_API_LOGS
 			trace('created [${effect}] GDI effect from class [WinEffect_${effect}]');
+			#end
 		}
 		else
 		{
+			#if WINDOWS_API_LOGS
 			trace('[WinEffect_${effect}] not found!');
+			#end
 		}
 		#end
 	}
@@ -238,7 +235,9 @@ class WindowsGDI
 		}
 		else
 		{
+			#if WINDOWS_API_LOGS
 			trace('[WinEffect_${effect}] not found!');
+			#end
 		}
 		#end
 	}
@@ -257,7 +256,9 @@ class WindowsGDI
 		}
 		else
 		{
+			#if WINDOWS_API_LOGS
 			trace('[WinEffect_${effect}] not found!');
+			#end
 		}
 		#end
 	}
@@ -277,7 +278,9 @@ class WindowsGDI
 		}
 		else
 		{
+			#if WINDOWS_API_LOGS
 			trace('[WinEffect_${effect}] not found!');
+			#end
 		}
 		#end
 	}
