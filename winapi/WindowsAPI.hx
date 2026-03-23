@@ -511,7 +511,7 @@ class WindowsAPI {
 		#if HX_WINDOWS
 		return cast WindowsCPP.getWindowCornerMode();
 		#else
-		return DWMWCP_DEFAULT;
+		return 0;
 		#end
 	}
 
