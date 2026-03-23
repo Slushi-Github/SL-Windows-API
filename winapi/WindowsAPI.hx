@@ -435,6 +435,12 @@ class WindowsAPI {
 
 	/**
 	 * Check if the program is running as administrator.
+	 * 
+	 * Keep in mind that if someone is running your program through 
+	 * Wine, and you, for example, exit the program if this returns 
+	 * true, I would recommend avoiding that if `isRunningInWine` is 
+	 * true to prevent your program from freezing in Wine.
+	 * 
 	 * @return True if the program is running as administrator.
 	 */
 	public static function isRunningAsAdministrator():Bool {
