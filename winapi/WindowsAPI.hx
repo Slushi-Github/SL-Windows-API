@@ -6,6 +6,9 @@ import sys.io.Process;
 
 import haxe.io.Path;
 
+#if lime
+import lime.system.System;
+#end
 
 using StringTools;
 
@@ -689,8 +692,9 @@ class WindowsAPI {
 	}
 
 	/////////////////////////////////
+
 	@:noPrivateAccess private static var _windowsWallpaperPath:String = null;
-	@:noPrivateAccess private static var changedWallpaper:Null<Bool> = false;
+	@:noPrivateAccess private static var _changedWallpaper:Bool = false;
 
 	/**
 	 * Change the Windows wallpaper.
@@ -798,9 +802,9 @@ class WindowsAPI {
 			"Windows 7" => Windows_7,
 		];
 
-		final platformLabel = System.platformLabel;
-		final words = platformLabel.split(" ");
-		final windowsIndex = words.indexOf("Windows");
+		var platformLabel = System.platformLabel;
+		var words = platformLabel.split(" ");
+		var windowsIndex = words.indexOf("Windows");
 		var result = "";
 
 		if (windowsIndex != -1 && windowsIndex < words.length - 1)
@@ -827,9 +831,9 @@ class WindowsAPI {
 		setTaskBarAlpha(1);
 		setDesktopWindowsAlpha(1);
 
-		if (changedWallpaper) {
-			setOldWindowsWallpaper();
-			changedWallpaper = false;
+		if (_changedWallpaper) {
+			restoreWindowsWallpaper();
+			_changedWallpaper = false;
 		}
 		#end
 	}
