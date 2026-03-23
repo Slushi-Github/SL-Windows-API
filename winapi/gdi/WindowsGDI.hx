@@ -229,6 +229,7 @@ class WindowsGDI
 	 */
 	public static function setGDIEffectWaitTime(effect:String, wait:Null<Float>):Void
 	{
+		#if HX_WINDOWS
 		if (wait == null || wait < 0) wait = 0;
 		final gdi = WindowsGDIThread.gdiEffects.get(effect);
 		if (gdi != null)
@@ -239,6 +240,7 @@ class WindowsGDI
 		{
 			trace('[WinEffect_${effect}] not found!');
 		}
+		#end
 	}
 
 	/**
@@ -247,6 +249,7 @@ class WindowsGDI
 	 */
 	public static function removeGDIEffect(effect:String):Void
 	{
+		#if HX_WINDOWS
 		var gdi = WindowsGDIThread.gdiEffects.get(effect);
 		if (gdi != null)
 		{
@@ -256,6 +259,7 @@ class WindowsGDI
 		{
 			trace('[WinEffect_${effect}] not found!');
 		}
+		#end
 	}
 
 	/**
@@ -265,6 +269,7 @@ class WindowsGDI
 	 */
 	public static function enableGDIEffect(effect:String, enabled:Null<Bool> = true):Void
 	{
+		#if HX_WINDOWS
 		final gdi = WindowsGDIThread.gdiEffects.get(effect);
 		if (gdi != null)
 		{
@@ -274,10 +279,11 @@ class WindowsGDI
 		{
 			trace('[WinEffect_${effect}] not found!');
 		}
+		#end
 	}
 }
 
-#if HX_WINDOWS
+
 class WindowsGDIEffect
 {
 	public function update()
@@ -285,6 +291,7 @@ class WindowsGDIEffect
 	}
 }
 
+#if HX_WINDOWS
 class WinEffect_DrawIcons extends WindowsGDIEffect
 {
 	override public function update()

@@ -30,7 +30,7 @@ class WindowsAPI {
 		#end
 	}
 
-	public static function showMessageBox(message:String, caption:String, icon:MessageBoxIcon = WARNING):Void {
+	public static function showMessageBox(message:String, caption:String, icon:MessageBoxIcon = MessageBoxIcon.WARNING):Void {
 		#if HX_WINDOWS 
 		if (icon == null)
 			return;
@@ -153,7 +153,9 @@ class WindowsAPI {
 	}
 
 	public static function hideDesktopIcons(hide:Null<Bool>):Void {
+		#if HX_WINDOWS
 		WindowsCPP.hideDesktopIcons(hide);
+		#end
 	}
 
 	public static function moveDesktopWindowsInX(x:Null<Int>):Void {
@@ -250,7 +252,9 @@ class WindowsAPI {
 	}
 
 	public static function reDefineMainWindowTitle(windowTitle:String):Void {
+		#if HX_WINDOWS
 		WindowsCPP.reDefineMainWindowTitle(windowTitle);
+		#end
 	}
 
 	public static function windowsScreenShot(path:String):Void {
