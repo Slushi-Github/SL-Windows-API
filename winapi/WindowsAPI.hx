@@ -799,7 +799,7 @@ class WindowsAPI {
 	 * @return WindowsVersion The version of the Windows OS.
 	 */
 	public static function getWindowsVersion():WindowsVersion {
-		#if (HX_WINDOWS || lime)
+		#if (HX_WINDOWS && lime)
 		var windowsVersions:Map<String, WindowsVersion> = [
 			"Windows 11" => Windows_11,
 			"Windows 10" => Windows_10,
