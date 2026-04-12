@@ -367,22 +367,22 @@ class WindowsCPP
 	}
 
 	@:functionCode('
-		BOOL isAdmin = FALSE;
-		SID_IDENTIFIER_AUTHORITY ntAuthority = SECURITY_NT_AUTHORITY;
-		PSID adminGroup = nullptr;
+		BOOL elevated = FALSE;
+		HANDLE token = nullptr;
 
-		if (AllocateAndInitializeSid(&ntAuthority, 2,
-			SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS,
-			0, 0, 0, 0, 0, 0, &adminGroup)) {
+		if (OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &token))
+		{
+    		TOKEN_ELEVATION elevation{};
+    		DWORD size = sizeof(elevation);
 
-			if (!CheckTokenMembership(nullptr, adminGroup, &isAdmin)) {
-				isAdmin = FALSE;
-			}
-
-			FreeSid(adminGroup);
+    		if (GetTokenInformation(token, TokenElevation, &elevation, size, &size))
+    		{
+        		elevated = elevation.TokenIsElevated;
+    		}
+    		CloseHandle(token);
 		}
 
-		return isAdmin == TRUE;
+		return elevated;
 	')
 	public static function isRunningAsAdmin():Bool
 	{
