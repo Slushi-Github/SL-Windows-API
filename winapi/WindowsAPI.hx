@@ -264,6 +264,8 @@ class WindowsAPI {
 	/**
 	 * Set the wallpaper.
 	 * @param path The absolute path to the wallpaper image.
+	 * 
+	 * Is recommended to use `changeWindowsWallpaper` instead.
 	 */
 	public static function setWallpaper(path:String):Void {
 		#if HX_WINDOWS
@@ -512,6 +514,15 @@ class WindowsAPI {
 		return cast WindowsCPP.getWindowCornerMode();
 		#else
 		return 0;
+		#end
+	}
+
+	/**
+	 * Set the program to be DPI aware.
+	 */
+	public static function setProgramDPIAware():Void {
+		#if HX_WINDOWS
+		WindowsCPP.setProgramDPIAware();
 		#end
 	}
 

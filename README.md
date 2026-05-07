@@ -1,6 +1,6 @@
 # SL WINDOWS API
 
-This library, actually called "Slushi Windows API", is a library for Haxe, with a lot of Windows API functions, to use it in your Haxe projects.
+This library, actually called *"Slushi Windows API"*, is a library for Haxe, with a lot of Windows API functions, to use it in your Haxe projects.
 
 the functions you can use can be found in `winapi/WIndowsAPI.hx`.
 
@@ -8,7 +8,21 @@ This is a simplified version of the Windows API that I have in my [Friday Night 
 
 Define `WINDOWS_API_LOGS` for enable logs of this library.
 
-## How to use this:
+## Installation
+
+Get from haxelib:
+
+```bash
+haxelib install sl-windows-api
+```
+
+Or from GitHub for more recent versions:
+
+```bash
+haxelib git sl-windows-api https://github.com/Slushi-Github/SL-Windows-API
+```
+
+## How to use:
 
 For functions where something related to the window is modified, it is necessary to use this function to define the window title (it is recommended to leave this in an update function).
 
@@ -31,7 +45,18 @@ import winapi.WindowsAPI;
 WindowsAPI.setWindowBorderColor(255, 0, 0);
 ```
 
+Get and move the desktop icons window:
+
+```haxe
+// import the library.
+import winapi.WindowsAPI;
+
+// Move the desktop icons window.
+WindowsAPI.moveDesktopWindowsInXY(WindowsAPI.getDesktopWindowsXPos() + 20, WindowsAPI.getDesktopWindowsYPos() + 134);
+```
+
 ### GDI Effects:
+
 Windows GDI effects are effects that, in this case, run in full screen mode.
 This comes from the latest and final version of [Slushi Engine](https://github.com/Slushi-Github/Slushi-Engine) (for the [second-year anniversary song “C18H27NO3”](https://www.youtube.com/watch?v=t_KBhgGeu7g)), now ported outside the engine to this library.
 
@@ -66,7 +91,6 @@ WindowsGDI.enableGDIEffect('ScreenGlitches', false);
 WindowsGDIThread.stopWindowsGDIThread();
 ```
 
-# License 
-
+## License
 
 This project is released under the [MIT license](./LICENSE.md).

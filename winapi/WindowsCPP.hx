@@ -4,7 +4,7 @@ package winapi;
 <compilerflag value="/DelayLoad:ComCtl32.dll" if="HX_WINDOWS" />
 
 <target id="haxe">
-    <lib name="dwmapi.lib" if="HX_WINDOWS" />
+    <lib name="dwmapi.lib" if="HX_WINDOWS " />
     <lib name="shell32.lib" if="HX_WINDOWS" />
     <lib name="gdi32.lib" if="HX_WINDOWS" />
 	<lib name="advapi32.lib" if="HX_WINDOWS" />
@@ -158,22 +158,17 @@ int screenCapture(int x, int y, int w, int h, LPCSTR fname)
 
 //////////////////////////////////////////////////////////////////////////////////////
 ')
-class WindowsCPP
-{
+class WindowsCPP {
 	#if HX_WINDOWS
 	@:functionCode('
 		MessageBox(GetActiveWindow(), message, caption, icon | MB_SETFOREGROUND);
 	')
-	public static function showMessageBox(caption:String, message:String, icon:Int = 0x00000030)
-	{
-	}
+	public static function showMessageBox(caption:String, message:String, icon:Int = 0x00000030) {}
 
 	@:functionCode('
 		globalWindowTitle = windowTitle;
 	')
-	public static function reDefineMainWindowTitle(windowTitle:String)
-	{
-	}
+	public static function reDefineMainWindowTitle(windowTitle:String) {}
 
 	@:functionCode('
 		HWND hwnd = GET_MAIN_WINDOW();
@@ -184,9 +179,7 @@ class WindowsCPP
 			ShowWindow(hwnd, SW_HIDE);
 		}
     ')
-	static public function setWindowVisible(show:Bool)
-	{
-	}
+	static public function setWindowVisible(show:Bool) {}
 
 	@:functionCode('
         HWND hWnd = GET_MAIN_WINDOW();
@@ -196,9 +189,7 @@ class WindowsCPP
             SetLayeredWindowAttributes(hWnd, RGB(r, g, b), 0, LWA_COLORKEY);
         }
     ')
-	static public function setWindowTransparent(r:Int = 25, g:Int = 25, b:Int = 25)
-	{
-	}
+	static public function setWindowTransparent(r:Int = 25, g:Int = 25, b:Int = 25) {}
 
 	@:functionCode('
         HWND hWnd = GET_MAIN_WINDOW();
@@ -208,9 +199,7 @@ class WindowsCPP
             SetLayeredWindowAttributes(hWnd, RGB(0, 0, 0), 1, LWA_COLORKEY);
         }
     ')
-	static public function disableWindowTransparent()
-	{
-	}
+	static public function disableWindowTransparent() {}
 
 	@:functionCode('
         HWND window = GET_MAIN_WINDOW();
@@ -227,9 +216,7 @@ class WindowsCPP
 
         UpdateWindow(window);
     ')
-	public static function setWindowBorderColor(r:Int, g:Int, b:Int)
-	{
-	}
+	public static function setWindowBorderColor(r:Int, g:Int, b:Int) {}
 
 	@:functionCode('
         HWND window = GET_MAIN_WINDOW();
@@ -237,12 +224,10 @@ class WindowsCPP
         UINT thickness = th;
 
         DwmSetWindowAttribute(window, DWMWA_VISIBLE_FRAME_BORDER_THICKNESS, &thickness, sizeof(thickness));
-    ') 
-    public static function setWindowthickness(th:Int = 0)
-    {
-    }
-	
-    @:functionCode('
+    ')
+	public static function setWindowthickness(th:Int = 0) {}
+
+	@:functionCode('
         HWND window = GET_MAIN_WINDOW();
 
         auto color2 = RGB(r, g, b);
@@ -250,9 +235,7 @@ class WindowsCPP
 
 		UpdateWindow(window);
     ')
-    public static function setWindowTextColor(r:Int, g:Int, b:Int):Void
-    {
-    }
+	public static function setWindowTextColor(r:Int, g:Int, b:Int):Void {}
 
 	@:functionCode('
 		HWND window = GET_MAIN_WINDOW();
@@ -260,9 +243,7 @@ class WindowsCPP
 
 		DwmSetWindowAttribute(window, DWMWA_WINDOW_CORNER_PREFERENCE, &preference, sizeof(preference));
 	')
-	public static function setWindowRound(pmode:Int = 0)
-    {
-    }
+	public static function setWindowRound(pmode:Int = 0) {}
 
 	@:functionCode('
 		HWND window = GET_MAIN_WINDOW();
@@ -273,17 +254,13 @@ class WindowsCPP
 
 		UpdateWindow(window);
 	')
-	public static function windowDarkMode(dmode:Bool):Void
-    {
-    }
-	
+	public static function windowDarkMode(dmode:Bool):Void {}
+
 	@:functionCode('
 	HWND window = GET_MAIN_WINDOW();
 	SetWindowLong(window, GWL_EXSTYLE, GetWindowLong(window, GWL_EXSTYLE) ^ WS_EX_LAYERED);
 	')
-	public static function _setWindowLayered()
-	{
-	}
+	public static function _setWindowLayered() {}
 
 	@:functionCode('
         HWND window = GET_MAIN_WINDOW();
@@ -299,8 +276,7 @@ class WindowsCPP
 
        	SetLayeredWindowAttributes(window, 0, (255 * (a * 100)) / 100, LWA_ALPHA);
     ')
-	public static function setWindowAlpha(alpha:Float)
-	{
+	public static function setWindowAlpha(alpha:Float) {
 		return alpha;
 	}
 
@@ -319,8 +295,7 @@ class WindowsCPP
 
 		return alphaFloat;
 	')
-	public static function getWindowAlpha():Float
-	{
+	public static function getWindowAlpha():Float {
 		return 0;
 	}
 
@@ -340,9 +315,7 @@ class WindowsCPP
         SetWindowPos(hwnd, NULL, centerX, centerY, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
     ')
 	@:noCompletion
-	public static function centerWindow()
-	{
-	}
+	public static function centerWindow() {}
 
 	@:functionCode('
 	POINT MousePoint;
@@ -350,8 +323,7 @@ class WindowsCPP
 
 	return MousePoint.x;
     ')
-	static public function getCursorPositionX()
-	{
+	static public function getCursorPositionX() {
 		return 0;
 	}
 
@@ -361,8 +333,7 @@ class WindowsCPP
 
 	return MousePoint.y;
     ')
-	static public function getCursorPositionY()
-	{
+	static public function getCursorPositionY() {
 		return 0;
 	}
 
@@ -384,8 +355,7 @@ class WindowsCPP
 
 		return elevated;
 	')
-	public static function isRunningAsAdmin():Bool
-	{
+	public static function isRunningAsAdmin():Bool {
 		return false;
 	}
 
@@ -395,9 +365,7 @@ class WindowsCPP
 		screenCapture(0, 0, screenWidth, screenHeight, path);
 	')
 	@:noCompletion
-	public static function windowsScreenShot(path:String)
-	{
-	}
+	public static function windowsScreenShot(path:String) {}
 
 	@:functionCode("
 		unsigned long long allocatedRAM = 0;
@@ -405,8 +373,7 @@ class WindowsCPP
 
 		return (allocatedRAM / 1024);
 	")
-	public static function obtainRAM()
-	{
+	public static function obtainRAM() {
 		return 0;
 	}
 
@@ -423,9 +390,7 @@ class WindowsCPP
 			ShowWindow(hwnd2, SW_SHOW);
 		}
     ')
-	public static function hideTaskbar(hide:Bool)
-	{
-	}
+	public static function hideTaskbar(hide:Bool) {}
 
 	@:functionCode('
 		const char* filepath = path;
@@ -436,9 +401,7 @@ class WindowsCPP
 	
 		SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, filepathBuffer, uiAction);	
     ')
-	public static function setWallpaper(path:String)
-	{
-	}
+	public static function setWallpaper(path:String) {}
 
 	@:functionCode('
 		bool value = hide;
@@ -451,9 +414,7 @@ class WindowsCPP
 			ShowWindow (hChild, SW_SHOW);
 		}
     ')
-	public static function hideDesktopIcons(hide:Bool)
-	{
-	}
+	public static function hideDesktopIcons(hide:Bool) {}
 
 	@:functionCode('
 		HWND hd;
@@ -464,9 +425,7 @@ class WindowsCPP
 
 		SetWindowPos(hd, NULL, x, NULL, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
     ')
-	public static function moveDesktopWindowsInX(x:Int)
-	{
-	}
+	public static function moveDesktopWindowsInX(x:Int) {}
 
 	@:functionCode('
 		HWND hd;
@@ -477,9 +436,7 @@ class WindowsCPP
 
 		SetWindowPos(hd, NULL, NULL, y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
     ')
-	public static function moveDesktopWindowsInY(y:Int)
-	{
-	}
+	public static function moveDesktopWindowsInY(y:Int) {}
 
 	@:functionCode('
 		HWND hd;
@@ -490,9 +447,7 @@ class WindowsCPP
 
 		SetWindowPos(hd, NULL, x, y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
     ')
-	public static function moveDesktopWindowsInXY(x:Int, y:Int)
-	{
-	}
+	public static function moveDesktopWindowsInXY(x:Int, y:Int) {}
 
 	@:functionCode('
 		HWND hd;
@@ -508,8 +463,7 @@ class WindowsCPP
 
 		return x;
 	')
-	public static function returnDesktopWindowsX()
-	{
+	public static function returnDesktopWindowsX() {
 		return 0;
 	}
 
@@ -527,8 +481,7 @@ class WindowsCPP
 
 		return y;
 	')
-	public static function returnDesktopWindowsY()
-	{
+	public static function returnDesktopWindowsY() {
 		return 0;
 	}
 
@@ -547,8 +500,7 @@ class WindowsCPP
 
        	SetLayeredWindowAttributes(hChild, 0, (255 * (a * 100)) / 100, LWA_ALPHA);
     ')
-	public static function _setDesktopWindowsAlpha(alpha:Float)
-	{
+	public static function _setDesktopWindowsAlpha(alpha:Float) {
 		return alpha;
 	}
 
@@ -568,8 +520,7 @@ class WindowsCPP
        	SetLayeredWindowAttributes(hwnd, 0, (255 * (a * 100)) / 100, LWA_ALPHA);
 		SetLayeredWindowAttributes(hwnd2, 0, (255 * (a * 100)) / 100, LWA_ALPHA);
     ')
-	public static function _setTaskBarAlpha(alpha:Float)
-	{
+	public static function _setTaskBarAlpha(alpha:Float) {
 		return alpha;
 	}
 
@@ -594,9 +545,7 @@ class WindowsCPP
 		SetWindowLong(window2, GWL_EXSTYLE, GetWindowLong(window2, GWL_EXSTYLE) ^ WS_EX_LAYERED);
 	}
 	')
-	public static function _setWindowLayeredMode(numberMode:Int)
-	{
-	}
+	public static function _setWindowLayeredMode(numberMode:Int) {}
 
 	@:functionCode('
 		HMODULE ntdll = GetModuleHandleA("ntdll.dll");
@@ -658,4 +607,9 @@ class WindowsCPP
 	@:noCompletion
 	public static function setHiddenFolder(path:String):Void {}
 	#end
+
+	@:functionCode('
+		SetProcessDPIAware();
+	')
+	public static function setProgramDPIAware() {}
 }
