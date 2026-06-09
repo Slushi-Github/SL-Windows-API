@@ -1,13 +1,13 @@
 package winapi;
 
 @:buildXml('
-<compilerflag value="/DelayLoad:ComCtl32.dll" if="HX_WINDOWS" />
+<compilerflag value="/DelayLoad:ComCtl32.dll" if="HX_WINDOWS || windows" />
 
 <target id="haxe">
-    <lib name="dwmapi.lib" if="HX_WINDOWS " />
-    <lib name="shell32.lib" if="HX_WINDOWS" />
-    <lib name="gdi32.lib" if="HX_WINDOWS" />
-	<lib name="advapi32.lib" if="HX_WINDOWS" />
+    <lib name="dwmapi.lib" if="HX_WINDOWS || windows" />
+    <lib name="shell32.lib" if="HX_WINDOWS || windows" />
+    <lib name="gdi32.lib" if="HX_WINDOWS || windows" />
+	<lib name="advapi32.lib" if="HX_WINDOWS || windows" />
 </target>
 ')
 @:cppFileCode('
@@ -159,7 +159,7 @@ int screenCapture(int x, int y, int w, int h, LPCSTR fname)
 //////////////////////////////////////////////////////////////////////////////////////
 ')
 class WindowsCPP {
-	#if HX_WINDOWS
+	#if (HX_WINDOWS || windows)
 	@:functionCode('
 		MessageBox(GetActiveWindow(), message, caption, icon | MB_SETFOREGROUND);
 	')
@@ -343,14 +343,14 @@ class WindowsCPP {
 
 		if (OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &token))
 		{
-    		TOKEN_ELEVATION elevation{};
-    		DWORD size = sizeof(elevation);
+			TOKEN_ELEVATION elevation{};
+			DWORD size = sizeof(elevation);
 
-    		if (GetTokenInformation(token, TokenElevation, &elevation, size, &size))
-    		{
-        		elevated = elevation.TokenIsElevated;
-    		}
-    		CloseHandle(token);
+			if (GetTokenInformation(token, TokenElevation, &elevation, size, &size))
+			{
+				elevated = elevation.TokenIsElevated;
+			}
+			CloseHandle(token);
 		}
 
 		return elevated;
@@ -606,10 +606,10 @@ class WindowsCPP {
 	')
 	@:noCompletion
 	public static function setHiddenFolder(path:String):Void {}
-	#end
 
 	@:functionCode('
 		SetProcessDPIAware();
 	')
 	public static function setProgramDPIAware() {}
+	#end
 }

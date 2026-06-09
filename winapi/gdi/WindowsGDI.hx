@@ -127,7 +127,7 @@ BOOL CALLBACK EnumChildProc(HWND hwnd, LPARAM lParam) {
  */
 class WindowsGDI
 {
-	#if HX_WINDOWS
+	#if (HX_WINDOWS || windows)
 	@:functionCode('
         elapsedTime = elapsed;
     ')
@@ -193,7 +193,7 @@ class WindowsGDI
 	 */
 	public static function prepareGDIEffect(effect:String, wait:Null<Float> = 0):Void
 	{
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (wait == null || wait < 0) wait = 0;
 
 		var effectClass = Type.resolveClass('winapi.gdi.WinEffect_' + effect);
@@ -226,7 +226,7 @@ class WindowsGDI
 	 */
 	public static function setGDIEffectWaitTime(effect:String, wait:Null<Float>):Void
 	{
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (wait == null || wait < 0) wait = 0;
 		final gdi = WindowsGDIThread.gdiEffects.get(effect);
 		if (gdi != null)
@@ -248,7 +248,7 @@ class WindowsGDI
 	 */
 	public static function removeGDIEffect(effect:String):Void
 	{
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		var gdi = WindowsGDIThread.gdiEffects.get(effect);
 		if (gdi != null)
 		{
@@ -270,7 +270,7 @@ class WindowsGDI
 	 */
 	public static function enableGDIEffect(effect:String, enabled:Null<Bool> = true):Void
 	{
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		final gdi = WindowsGDIThread.gdiEffects.get(effect);
 		if (gdi != null)
 		{
@@ -294,7 +294,7 @@ class WindowsGDIEffect
 	}
 }
 
-#if HX_WINDOWS
+#if (HX_WINDOWS || windows)
 class WinEffect_DrawIcons extends WindowsGDIEffect
 {
 	override public function update()

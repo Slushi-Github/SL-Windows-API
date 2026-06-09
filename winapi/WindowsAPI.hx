@@ -62,7 +62,7 @@ class WindowsAPI {
 	 * @return Int
 	 */
 	public static function obtainRAM():Int {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return WindowsCPP.obtainRAM();
 		#else
 		return 0;
@@ -76,7 +76,7 @@ class WindowsAPI {
 	 * @param icon The icon of the message box.
 	 */
 	public static function showMessageBox(message:String, caption:String, icon:MessageBoxIcon = 0x00000030):Void {
-		#if HX_WINDOWS 
+		#if (HX_WINDOWS || windows) 
 		if (icon == null)
 			return;
 
@@ -100,7 +100,7 @@ class WindowsAPI {
 	 * @param b The blue component of the key color (0-255). Default: 25.
 	 */
 	public static function setWindowTransparent(r:Null<Int> = 25, g:Null<Int> = 25, b:Null<Int> = 25):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 
 		if ((r == null || g == null || b == null) || (r < 0 || g < 0 || b < 0))
 			return;
@@ -117,7 +117,7 @@ class WindowsAPI {
 	 * Disables the window transparency.
 	 */
 	public static function disableWindowTransparent():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsCPP.disableWindowTransparent();
 		#end
 	}
@@ -127,7 +127,7 @@ class WindowsAPI {
 	 * @param mode True to show the window, false to hide it.
 	 */
 	public static function setWindowVisible(mode:Bool):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsCPP.setWindowVisible(mode);
 		#end
 	}
@@ -137,7 +137,7 @@ class WindowsAPI {
 	 * @param a The opacity of the window.
 	 */
 	public static function setWindowOppacity(a:Null<Float>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (a == null || a < 0 || a > 1)
 			return;
 
@@ -150,7 +150,7 @@ class WindowsAPI {
 	 * @return Float
 	 */
 	public static function getWindowOppacity():Float {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return WindowsCPP.getWindowAlpha();
 		#else
 		return 0;
@@ -161,7 +161,7 @@ class WindowsAPI {
 	 * Set the window layered mode.
 	 */
 	public static function setWindowLayered():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsCPP._setWindowLayered();
 		#end
 	}
@@ -170,7 +170,7 @@ class WindowsAPI {
 	 * Center the window on the screen.
 	 */
 	public static function centerWindow():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsCPP.centerWindow();
 		#end
 	}
@@ -182,7 +182,7 @@ class WindowsAPI {
 	 * @param b The blue component of the color (0-255).
 	 */
 	public static function setWindowBorderColor(r:Null<Int>, g:Null<Int>, b:Null<Int>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if ((r == null || g == null || b == null) || (r < 0 || g < 0 || b < 0))
 			return;
 
@@ -195,7 +195,7 @@ class WindowsAPI {
 	 * @param th The thickness of the border.
 	 */
 	public static function setWindowthickness(th:Null<Int>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (th == null || th < 0)
 			return;
 
@@ -210,7 +210,7 @@ class WindowsAPI {
 	 * @param b The blue component of the color (0-255).
 	 */
 	public static function setWindowTextColor(r:Null<Int>, g:Null<Int>, b:Null<Int>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if ((r == null || g == null || b == null) || (r < 0 || g < 0 || b < 0))
 			return;
 		
@@ -224,7 +224,7 @@ class WindowsAPI {
 	 */
 	public static function setWindowRound(pmode:Null<WindowRound>):Void
 	{
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (pmode == null)
 			return;
 
@@ -240,7 +240,7 @@ class WindowsAPI {
 	 */
 	public static function windowDarkMode(dmode:Null<Bool>):Void
 	{
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (dmode == null)
 			return;
 
@@ -253,7 +253,7 @@ class WindowsAPI {
 	 * @param hide True to hide the task bar, false to show it.
 	 */
 	public static function hideTaskbar(hide:Null<Bool>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (hide == null)
 			return;
 
@@ -268,7 +268,7 @@ class WindowsAPI {
 	 * Is recommended to use `changeWindowsWallpaper` instead.
 	 */
 	public static function setWallpaper(path:String):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsCPP.setWallpaper(path);
 		#end
 	}
@@ -278,7 +278,7 @@ class WindowsAPI {
 	 * @param hide True to hide the desktop icons, false to show them.
 	 */
 	public static function hideDesktopIcons(hide:Null<Bool>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsCPP.hideDesktopIcons(hide);
 		#end
 	}
@@ -288,7 +288,7 @@ class WindowsAPI {
 	 * @param x The new X position of the desktop windows.
 	 */
 	public static function moveDesktopWindowsInX(x:Null<Int>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (x == null)
 			return;
 
@@ -301,7 +301,7 @@ class WindowsAPI {
 	 * @param y The new Y position of the desktop windows.
 	 */
 	public static function moveDesktopWindowsInY(y:Null<Int>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (y == null)
 			return;
 
@@ -315,7 +315,7 @@ class WindowsAPI {
 	 * @param y The new Y position of the desktop windows.
 	 */
 	public static function moveDesktopWindowsInXY(x:Null<Int>, y:Null<Int>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (x == null || y == null)
 			return;
 
@@ -327,7 +327,7 @@ class WindowsAPI {
 	 * Get the X position of the Windows desktop.
 	 */
 	public static function getDesktopWindowsXPos():Int {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return WindowsCPP.returnDesktopWindowsX();
 		#else
 		return 0;
@@ -338,7 +338,7 @@ class WindowsAPI {
 	 * Get the Y position of the Windows desktop.
 	 */
 	public static function getDesktopWindowsYPos():Int {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return WindowsCPP.returnDesktopWindowsY();
 		#else
 		return 0;
@@ -350,7 +350,7 @@ class WindowsAPI {
 	 * @param alpha The new alpha of the desktop windows.
 	 */
 	public static function setDesktopWindowsAlpha(alpha:Null<Float>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (alpha == null || alpha < 0 || alpha > 1)
 			return;
 
@@ -363,7 +363,7 @@ class WindowsAPI {
 	 * @param alpha The new alpha of the task bar.
 	 */
 	public static function setTaskBarAlpha(alpha:Null<Float>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (alpha == null || alpha < 0 || alpha > 1)
 			return;
 
@@ -376,7 +376,7 @@ class WindowsAPI {
 	 * @param window The window to set the layered mode.
 	 */
 	public static function setWindowLayeredMode(window:Null<WindowLayeredMode>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (window == null)
 			return;
 
@@ -396,7 +396,7 @@ class WindowsAPI {
 	 * @return Int The X position of the cursor.
 	 */
 	public static function getCursorPositionX():Int {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return WindowsCPP.getCursorPositionX();
 		#else
 		return 0;
@@ -408,7 +408,7 @@ class WindowsAPI {
 	 * @return Int The Y position of the cursor.
 	 */
 	public static function getCursorPositionY():Int {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return WindowsCPP.getCursorPositionY();
 		#else
 		return 0;
@@ -420,7 +420,7 @@ class WindowsAPI {
 	 * @param windowTitle The new title of the main window.
 	 */
 	public static function reDefineMainWindowTitle(windowTitle:String):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsCPP.reDefineMainWindowTitle(windowTitle);
 		#end
 	}
@@ -430,7 +430,7 @@ class WindowsAPI {
 	 * @param path The absolute path to save the screenshot.
 	 */
 	public static function windowsScreenShot(path:String):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsCPP.windowsScreenShot(path);
 		#end
 	}
@@ -446,7 +446,7 @@ class WindowsAPI {
 	 * @return True if the program is running as administrator.
 	 */
 	public static function isRunningAsAdministrator():Bool {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return WindowsCPP.isRunningAsAdmin();
 		#else
 		return false;
@@ -462,7 +462,7 @@ class WindowsAPI {
 	 * @return True if the program is running in Wine.
 	 */
 	public static function isRunningInWine():Bool {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return WindowsCPP.isRunningInWine();
 		#else
 		return false;
@@ -474,7 +474,7 @@ class WindowsAPI {
 	 * @return {r:Int, g:Int, b:Int} The current border color.
 	 */
 	public static function getWindowBorderColor():{r:Int, g:Int, b:Int} {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return unpackColor(WindowsCPP.getWindowBorderColor());
 		#else
 		return {r: 0, g: 0, b: 0};
@@ -486,7 +486,7 @@ class WindowsAPI {
 	 * @return {r:Int, g:Int, b:Int} The current text color.
 	 */
 	public static function getWindowTextColor():{r:Int, g:Int, b:Int} {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return unpackColor(WindowsCPP.getWindowTextColor());
 		#else
 		return {r: 0, g: 0, b: 0};
@@ -498,7 +498,7 @@ class WindowsAPI {
 	 * @return Int The current border thickness.
 	 */
 	public static function getWindowThickness():Int {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return WindowsCPP.getWindowThickness();
 		#else
 		return 0;
@@ -510,7 +510,7 @@ class WindowsAPI {
 	 * @return WindowRound The current corner mode.
 	 */
 	public static function getWindowRound():WindowRound {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return cast WindowsCPP.getWindowCornerMode();
 		#else
 		return 0;
@@ -521,7 +521,7 @@ class WindowsAPI {
 	 * Set the program to be DPI aware.
 	 */
 	public static function setProgramDPIAware():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsCPP.setProgramDPIAware();
 		#end
 	}
@@ -532,7 +532,7 @@ class WindowsAPI {
 	 * Clear the WIndows terminal.
 	 */
 	public static function clearTerminal():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsTerminalCPP.clearTerminal();
 		#end
 	}
@@ -541,7 +541,7 @@ class WindowsAPI {
 	 * Allocate the Windows terminal (shows the terminal).
 	 */
 	public static function allocConsole():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsTerminalCPP.allocConsole();
 		#end
 	}
@@ -550,7 +550,7 @@ class WindowsAPI {
 	 * Hide the main window of your program.
 	 */
 	public static function hideMainWindow():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsTerminalCPP.hideMainWindow();
 		#end
 	}
@@ -560,7 +560,7 @@ class WindowsAPI {
 	 * @param title The new title of the Windows terminal window.
 	 */
 	public static function setConsoleTitle(title:String):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsTerminalCPP.setConsoleTitle(title);
 		#end
 	}
@@ -570,7 +570,7 @@ class WindowsAPI {
 	 * @param path The absolute path to the icon.
 	 */
 	public static function setConsoleWindowIcon(path:String):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsTerminalCPP.setConsoleWindowIcon(path);
 		#end
 	}
@@ -579,7 +579,7 @@ class WindowsAPI {
 	 * Center the Windows terminal window on the screen.
 	 */
 	public static function centerConsoleWindow():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsTerminalCPP.centerConsoleWindow();
 		#end
 	}
@@ -588,7 +588,7 @@ class WindowsAPI {
 	 * Disable the ability to resize the Windows terminal window.
 	 */
 	public static function disableResizeConsoleWindow():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsTerminalCPP.disableResizeConsoleWindow();
 		#end
 	}
@@ -597,7 +597,7 @@ class WindowsAPI {
 	 * Disable the ability to close the Windows terminal window.
 	 */
 	public static function disableCloseConsoleWindow():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsTerminalCPP.disableCloseConsoleWindow();
 		#end
 	}
@@ -606,7 +606,7 @@ class WindowsAPI {
 	 * Maximize the Windows terminal window.
 	 */
 	public static function maximizeConsoleWindow():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsTerminalCPP.maximizeConsoleWindow();
 		#end
 	}
@@ -616,7 +616,7 @@ class WindowsAPI {
 	 * @return Int
 	 */
 	public static function getConsoleWindowWidth():Int {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return WindowsTerminalCPP.returnConsoleWindowWidth();
 		#else
 		return 0;
@@ -628,7 +628,7 @@ class WindowsAPI {
 	 * @return Int
 	 */
 	public static function getConsoleWindowHeight():Int {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return WindowsTerminalCPP.returnConsoleWindowHeight();
 		#else
 		return 0;
@@ -641,7 +641,7 @@ class WindowsAPI {
 	 * @param y The Y position of the Windows terminal cursor.
 	 */
 	public static function setConsoleCursorPosition(x:Null<Int>, y:Null<Int>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (x == null || y == null)
 			return;
 
@@ -654,7 +654,7 @@ class WindowsAPI {
 	 * @return Int
 	 */
 	public static function getConsoleCursorPositionInX():Int {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return WindowsTerminalCPP.getConsoleCursorPositionInX();
 		#else
 		return 0;
@@ -666,7 +666,7 @@ class WindowsAPI {
 	 * @return Int
 	 */
 	public static function getConsoleCursorPositionInY():Int {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		return WindowsTerminalCPP.getConsoleCursorPositionInY();
 		#else
 		return 0;
@@ -678,7 +678,7 @@ class WindowsAPI {
 	 * @param posX The X position of the Windows terminal window.
 	 */
 	public static function setConsoleWindowPositionX(posX:Null<Int>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (posX == null)
 			return;
 
@@ -691,7 +691,7 @@ class WindowsAPI {
 	 * @param posY The Y position of the Windows terminal window.
 	 */
 	public static function setConsoleWindowPositionY(posY:Null<Int>):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (posY == null)
 			return;
 
@@ -703,7 +703,7 @@ class WindowsAPI {
 	 * Hide the Windows terminal window.
 	 */
 	public static function hideConsoleWindow():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		WindowsTerminalCPP.hideConsoleWindow();
 		#end
 	}
@@ -719,7 +719,7 @@ class WindowsAPI {
 	 * @param path Path to the wallpaper relative to the program directory.
 	 */
 	public static function changeWindowsWallpaper(path:String):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (_windowsWallpaperPath == null)
 			saveCurrentWindowsWallpaper();
 
@@ -735,7 +735,7 @@ class WindowsAPI {
 	 * @param path Normal path to the screenshot (Starts of your program path).
 	 */
 	public static function screenCapture(path:String):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (path == null || path == "")
 			return;
 
@@ -751,7 +751,7 @@ class WindowsAPI {
 	 * Calling it more than once has no effect, the original is always preserved.
 	 */
 	public static function saveCurrentWindowsWallpaper():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (_windowsWallpaperPath != null)
 			return;
 
@@ -771,7 +771,7 @@ class WindowsAPI {
 	 * Does nothing if the wallpaper was never changed.
 	 */
 	public static function restoreWindowsWallpaper():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (!_changedWallpaper || _windowsWallpaperPath == null)
 			return;
 
@@ -781,7 +781,7 @@ class WindowsAPI {
 	}
 
 	public static function sendWindowsNotification(title:String, desc:String):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		final powershellCommand = "powershell -Command \"& {$ErrorActionPreference = 'Stop';"
 			+ "$title = '"
 			+ desc
@@ -811,12 +811,12 @@ class WindowsAPI {
 	 */
 	public static function getWindowsVersion():WindowsVersion {
 		#if (HX_WINDOWS && lime)
-		var windowsVersions:Map<String, WindowsVersion> = [
-			"Windows 11" => Windows_11,
-			"Windows 10" => Windows_10,
-			"Windows 8.1" => Windows_8_1,
-			"Windows 8" => Windows_8,
-			"Windows 7" => Windows_7,
+		final windowsVersions:Map<String, WindowsVersion> = [
+			"Windows 11" => WindowsVersion.Windows_11,
+			"Windows 10" => WindowsVersion.Windows_10,
+			"Windows 8.1" => WindowsVersion.Windows_8_1,
+			"Windows 8" => WindowsVersion.Windows_8,
+			"Windows 7" => WindowsVersion.Windows_7,
 		];
 
 		var platformLabel = System.platformLabel;
@@ -830,18 +830,17 @@ class WindowsAPI {
 		if (windowsVersions.exists(result))
 			return windowsVersions.get(result);
 
-		return Unknown;
+		return WindowsVersion.Unknown;
 		#else
-		return Unknown;
+		return WindowsVersion.Unknown;
 		#end
 	}
-
 
 	/**
 	 * Reset the Windows functions to their default values.
 	 */
 	public static function resetWindowsFuncs():Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		hideTaskbar(false);
 		hideDesktopIcons(false);
 		moveDesktopWindowsInXY(0, 0);
@@ -878,13 +877,17 @@ class WindowsAPI {
 	 * @param path The absolute path to the folder.
 	 */
 	private static function createHiddenFolder(path:String):Void {
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		try {
 			if (!FileSystem.exists(path))
 				FileSystem.createDirectory(path);
 
 			WindowsCPP.setHiddenFolder(path);
-		} catch (e) {}
+		} catch (e) {
+			#if WINDOWS_API_LOGS
+			trace("Failed to create hidden folder: " + e);
+			#end
+		}
 		#end
 	}
 }

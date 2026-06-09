@@ -46,16 +46,20 @@ class WindowsGDIThread
 	 */
 	public static function initWindowsGDIThread():Void
 	{
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows && target.threaded)
 		if (mainThread != null)
 			return;
 
+		#if WINDOWS_API_LOGS
 		trace('Starting Windows GDI Thread...');
+		#end
 
 		mainThread = Thread.create(() ->
 		{
 			try {
+				#if WINDOWS_API_LOGS
 				trace('Windows GDI Thread running...');
+				#end
 				while (runningThread) {
 					if (temporarilyPaused) {
 						return;
@@ -77,7 +81,9 @@ class WindowsGDIThread
 					}
 				}
 			} catch (e:Dynamic) {
+				#if WINDOWS_API_LOGS
 				trace('Error in Windows GDI Thread: ' + e);
+				#end
 				stopWindowsGDIThread();
 			}
 		});
@@ -89,10 +95,12 @@ class WindowsGDIThread
 	 */
 	public static function stopWindowsGDIThread()
 	{
-		#if HX_WINDOWS
+		#if (HX_WINDOWS || windows)
 		if (mainThread != null)
 		{
+			#if WINDOWS_API_LOGS
 			trace('Stopping Windows GDI Thread...');
+			#end
 			runningThread = false;
 			temporarilyPaused = false;
 			mainThread = null;

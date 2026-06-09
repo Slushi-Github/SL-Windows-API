@@ -25,7 +25,7 @@ package winapi;
 ')
 class WindowsTerminalCPP
 {
-	#if HX_WINDOWS
+	#if (HX_WINDOWS || windows)
 	@:functionCode('
         system("CLS");
         std::cout<< "" <<std::flush;
