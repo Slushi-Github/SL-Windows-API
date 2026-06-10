@@ -158,6 +158,7 @@ int screenCapture(int x, int y, int w, int h, LPCSTR fname)
 
 //////////////////////////////////////////////////////////////////////////////////////
 ')
+@:dox(hide)
 class WindowsCPP {
 	#if (HX_WINDOWS || windows)
 	@:functionCode('

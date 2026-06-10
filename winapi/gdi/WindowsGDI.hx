@@ -131,6 +131,7 @@ class WindowsGDI
 	@:functionCode('
         elapsedTime = elapsed;
     ')
+	@:dox(hide)
 	public static function setElapsedTime(elapsed:Float)
 	{
 	}
@@ -138,6 +139,7 @@ class WindowsGDI
 	@:functionCode('
         payloadDrawErrors();
     ')
+	@:dox(hide)
 	public static function _drawIcons()
 	{
 	}
@@ -145,6 +147,7 @@ class WindowsGDI
 	@:functionCode('
         payloadBlink();
     ')
+	@:dox(hide)
 	public static function _screenBlink()
 	{
 	}
@@ -152,6 +155,7 @@ class WindowsGDI
 	@:functionCode('
         payloadGlitchs();
     ')
+	@:dox(hide)
 	public static function _screenGlitches()
 	{
 	}
@@ -159,6 +163,7 @@ class WindowsGDI
 	@:functionCode('
         payloadTunnel();
     ')
+	@:dox(hide)
 	public static function _screenTunnel()
 	{
 	}
@@ -166,6 +171,7 @@ class WindowsGDI
 	@:functionCode('
         payloadScreenShake();
     ')
+	@:dox(hide)
 	public static function _screenShake()
 	{
 	}
@@ -286,7 +292,7 @@ class WindowsGDI
 	}
 }
 
-
+@:dox(hide)
 class WindowsGDIEffect
 {
 	public function update()
@@ -295,6 +301,7 @@ class WindowsGDIEffect
 }
 
 #if (HX_WINDOWS || windows)
+@:dox(hide)
 class WinEffect_DrawIcons extends WindowsGDIEffect
 {
 	override public function update()
@@ -303,6 +310,7 @@ class WinEffect_DrawIcons extends WindowsGDIEffect
 	}
 }
 
+@:dox(hide)
 class WinEffect_ScreenBlink extends WindowsGDIEffect
 {
 	override public function update()
@@ -311,6 +319,7 @@ class WinEffect_ScreenBlink extends WindowsGDIEffect
 	}
 }
 
+@:dox(hide)
 class WinEffect_ScreenGlitches extends WindowsGDIEffect
 {
 	override public function update()
@@ -319,6 +328,7 @@ class WinEffect_ScreenGlitches extends WindowsGDIEffect
 	}
 }
 
+@:dox(hide)
 class WinEffect_ScreenShake extends WindowsGDIEffect
 {
 	override public function update()
@@ -327,6 +337,7 @@ class WinEffect_ScreenShake extends WindowsGDIEffect
 	}
 }
 
+@:dox(hide)
 class WinEffect_ScreenTunnel extends WindowsGDIEffect
 {
 	override public function update()
@@ -335,6 +346,7 @@ class WinEffect_ScreenTunnel extends WindowsGDIEffect
 	}
 }
 
+@:dox(hide)
 class WinEffect_SetTitleTextToWindows extends WindowsGDIEffect
 {
 	public var text:String = "";

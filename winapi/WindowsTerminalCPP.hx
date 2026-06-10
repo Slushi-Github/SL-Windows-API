@@ -23,6 +23,7 @@ package winapi;
 #pragma comment(lib, "gdi32.lib")
 #endif
 ')
+@:dox(hide)
 class WindowsTerminalCPP
 {
 	#if (HX_WINDOWS || windows)
